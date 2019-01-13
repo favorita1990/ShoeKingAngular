@@ -1,0 +1,27 @@
+
+<div class="modal" id="window_message" *ngIf="messagesWin" style="display: block;">
+    <div class="modal-dialog shopping-cart-modal-dialog animate">
+        <div class="modal-content">
+            <div class="modal-body" (clickOutside)="onClickedOutsideMessagesWin($event)">
+                <div class="message-header"><span class="glyphicon glyphicon-remove delete-message"></span>
+                    <div class="messageUser blink"><img src="../../assets/201851421423_slide4.jpg" alt="message" title="message">
+                    <div>Xaxax - fa <span>( 2 )</span><span class="unread-message-user">Unread</span></div></div>
+                </div>
+
+                <div class="message-header"><span class="glyphicon glyphicon-remove delete-message"></span>
+                    <div class="messageUser"><img src="../../assets/201851421423_slide4.jpg" alt="message" title="message">
+                    <div>Xaxax - fa 2 <span>( 2 )</span></div></div>
+                </div>
+
+                <div class="message-header"><span class="glyphicon glyphicon-remove delete-message"></span>
+                    <div class="messageUser blink"><div class="message-no-img-size">Xaxax - fa 3 <span class="unread-message-user">
+                    Unread</span></div></div>
+                </div>
+
+                <div class="message-header"><span class="glyphicon glyphicon-remove delete-message"></span>
+                    <div class="messageUser"><div class="message-no-img-size">Xaxax - fa 4</div></div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

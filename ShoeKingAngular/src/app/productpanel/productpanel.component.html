@@ -1,0 +1,568 @@
+
+    <div class="product-grid-container">
+        <div class="grid-container-inside-size">
+                <kendo-grid
+                [kendoGridTemplateEditing]="createNewProduct"
+                [kendoGridBinding]="gridView"
+                [selectable]="true"
+                [pageSize]="10"
+                [pageable]="true"
+                [sortable]="true"
+                [navigable]="true"
+                >
+                <!-- <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridAddCommand type="button">Add new</button>
+                </ng-template> -->
+                <ng-template kendoGridToolbarTemplate>
+                    <a class='k-button k-button-icontext' (click)="createProductWindow()">
+                        <span class='k-icon k-i-plus'></span>Add new
+                    </a>
+                </ng-template>
+                <kendo-grid-column field="ProductId" width="130" title="Product Id">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.ProductId" kendoGridFocusable name="ProductId" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Name" width="180" title="Product name">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.Name" kendoGridFocusable name="Name" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Price" width="120" editor="numeric" title="Price">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.Price" kendoGridFocusable name="Price" class="k-textbox" type="number"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="PromotionPercent" width="140" title="Promotion %">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.PromotionPercent" kendoGridFocusable name="PromotionPercent" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="PromotionPrice" width="140" title="Promotion $">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.PromotionPrice" kendoGridFocusable name="PromotionPrice" class="k-textbox" required/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Status" width="80" title="Status">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.Status" kendoGridFocusable name="Status" type="text"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="DateAdded" width="200" title="Added">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.DateAdded" kendoGridFocusable name="DateAdded" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="CreatedBy" width="200" title="Created by">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.CreatedBy" kendoGridFocusable name="CreatedBy" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="DateUpdated" width="200" title="Last Update">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.DateUpdated" kendoGridFocusable name="DateUpdated" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="UpdatedBy" width="200" title="Updated by">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.UpdatedBy" kendoGridFocusable name="UpdatedBy" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Deleted" width="110" title="Deleted">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.Deleted" kendoGridFocusable name="Deleted" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="CategoryName" width="200" title="Category Name">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input [(ngModel)]="dataItem.CategoryName" kendoGridFocusable name="CategoryName" type="checkbox"/>
+                    </ng-template>
+                </kendo-grid-column>
+             
+                <!-- <kendo-grid-column field="UnitsInStock" editor="numeric" title="Units In Stock">
+                    <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                        <input
+                            [(ngModel)]="dataItem.UnitsInStock"
+                            kendoGridFocusable
+                            name="UnitsInStock"
+                            required
+                            min="0"
+                            max="999"
+                            class="k-textbox"
+                            type="number"/>
+                    </ng-template>
+                </kendo-grid-column> -->
+                
+                <kendo-grid-column field="ProductID" width="200" title="edit">
+                    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                        <a class='k-button k-button-icontext' (click)="editProductWindow(dataItem)">
+                            <span class='k-icon k-i-edit'></span>Edit
+                        </a>
+                        <a class='k-button k-button-icontext' (click)="deleteProduct(dataItem)">
+                            <span class='k-icon k-i-delete'></span>Delete
+                        </a>
+                    </ng-template>
+                </kendo-grid-column>
+                <!-- <kendo-grid-command-column title="" width="180">
+                    <ng-template kendoGridCellTemplate let-isNew="isNew">
+                        <button kendoGridEditCommand [primary]="true">Edit</button>
+                        <button kendoGridRemoveCommand>Remove</button>
+                        <button kendoGridSaveCommand [disabled]="formGroup?.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+                        <button kendoGridCancelCommand>{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+                    </ng-template>
+                </kendo-grid-command-column> -->
+             </kendo-grid>
+        </div>
+    </div>
+
+    <kendo-window *ngIf="openCreateProduct" title="Add New Product" class="product-panel-win" (close)="closeWindowProduct()" >
+            <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+                <div class="product-panel-win-block">
+                    <label>Product name</label>
+                    <div>
+                        <input type="text" class="form-control" formControlName="ProductName" />
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.ProductName.errors" class="error">
+                        <div *ngIf="productForm.controls.ProductName.errors.required" style="color:#ff0000;">Product name is required</div>
+                    </div>
+                </div>
+
+                <!-- <div class="product-panel-win-block">
+                    <label>Bg Name</label>
+                    <div>
+                        <input type="text" name="name" class="form-control" formControlName="bgLanguage"/>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.bgLanguage.errors" class="error">
+                        <div *ngIf="productForm.controls.bgLanguage.errors.required" style="color:#ff0000;">Bg language is required</div>
+                    </div>
+                </div> -->
+            
+                <div class="product-panel-win-block">
+                    <label>Bg product name</label>
+                    <div>
+                        <input type="text" name="name" class="form-control" formControlName="BgProductName"/>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.BgProductName.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.BgProductName.errors.required">Bg product name is required</div>
+                    </div>
+                </div>
+            
+                <div class="product-panel-win-block">
+                    <label>
+                        Add Main Photo
+                    </label>
+                    <div>
+                        <input type="file" (change)="mainImageChangeEvent($event)" #mainImageInput accept=".png, .jpg, .jpeg, .gif" formControlName="MainImage" />
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.MainImage.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.MainImage.errors.required">Main photo is required</div>
+                    </div>
+                    <div *ngIf="errorMainImage" class="error" style="color:#ff0000;">
+                        Main photo is required
+                    </div>
+                </div>
+            
+                <div class="product-panel-win-block">
+                    <label>
+                        Add Slide Photos 
+                    </label>
+                    <div>
+                        <input type="file" multiple (change)="slideImagesChangeEvent($event)" #slideImagesInput accept=".png, .jpg, .jpeg, .gif" formControlName="SlideImages" />
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.SlideImages.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.SlideImages.errors.required">Slide photos are required</div>
+                    </div>
+                    <div *ngIf="errorSlideImages" class="error" style="color:#ff0000;">
+                        Slide photos are required
+                    </div>
+                </div>
+            
+                <div class="product-panel-win-block">
+                    <label>Price</label>
+                    <div>
+                        <input type="number" class="form-control" formControlName="Price"/>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.Price.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.Price.errors.required">Price is required</div>
+                    </div>
+                </div>
+            
+                <div class="product-panel-win-block">
+                    <label>Discounts</label>
+                    <div>
+                        <select (change)="onChangeProductSpecials($event.target.value)" formControlName="ProductSpecials" class="form-control">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.ProductSpecials.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.ProductSpecials.errors.required">Discounts are required</div>
+                    </div>
+                </div>
+                <div *ngIf="selectedProductSpecials" class="product-panel-win-block" >
+                    <label>Promotion %</label>
+                    <div>
+                        <input type="text" class="form-control" formControlName="PromotionPercent" />
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.PromotionPercent.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.PromotionPercent.errors.required">Promotion percent is required</div>
+                    </div>
+                </div>
+            
+            
+                <div class="product-panel-win-block">
+                    <label>Status</label>
+                    <div>
+                        <select class="form-control" formControlName="ProductStatus">
+                            <option value="1">In stock</option>
+                            <option value="0">Not In Stock</option>
+                        </select>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.ProductStatus.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.ProductStatus.errors.required">Status is required</div>
+                    </div>
+                </div>
+
+                <div class="product-panel-win-block">
+                    <label>Choose a category</label>
+                    <div>
+                        <select (change)="onChangeCategories($event.target.value)" formControlName="categoryDropdown" class="form-control">
+                            <option value="-1">---</option>
+                            <option value="0">Add new category</option>
+                            <option *ngFor="let category of categories" value="{{category.CategoryId}}" >{{category.Name}}</option>
+
+                            <!-- @foreach (var category in Model)
+                            {
+                            <option value="@category.CategoryId">@category.Name</option>
+                            } -->
+                        </select>
+                    </div>
+                    <div *ngIf="noneSelectedCategoryDropDown" class="error" style="color:#ff0000;">
+                        Make а choice
+                    </div>
+                </div>
+              
+                <form [formGroup]="categoryForm" *ngIf="selectedCategoryDropDown == '0'">
+                    <div class="product-panel-win-block">
+                            <div class="control-label margin-top-minus-5">New Category</div>
+                            <div>
+                                <input type="text" class="form-control" formControlName="ProductCategory" />
+                            </div>
+                            <div *ngIf="submitted && categoryForm.controls.ProductCategory.errors" class="error" style="color:#ff0000;">
+                                <div *ngIf="categoryForm.controls.ProductCategory.errors.required">Category name is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-panel-win-block">
+                            <label>Bg category name</label>
+                            <div>
+                                <input type="text" class="form-control" formControlName="BgProductCategory" />
+                            </div>
+                            <div *ngIf="submitted && categoryForm.controls.BgProductCategory.errors" class="error" style="color:#ff0000;">
+                                <div *ngIf="categoryForm.controls.BgProductCategory.errors.required">Bg category name is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-panel-win-block" >
+                            <label>Category Status</label>
+                            <div>
+                                <select class="form-control" formControlName="CategoryStatus">
+                                    <option value="1">In stock</option>
+                                    <option value="0">Not In Stock</option>
+                                </select>
+                            </div>
+                            <br />
+                            <div *ngIf="submitted && categoryForm.controls.CategoryStatus.errors" class="error" style="color:#ff0000;">
+                                <div *ngIf="categoryForm.controls.CategoryStatus.errors.required">Status is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-panel-win-block">
+                            <label>Status</label>
+                            <div>
+                                <select class="form-control" formControlName="GenderStatus">
+                                    <option value="1">Men</option>
+                                    <option value="0">Women</option>
+                                </select>
+                            </div>
+                            <div *ngIf="submitted && categoryForm.controls.GenderStatus.errors" class="error" style="color:#ff0000;">
+                                <div *ngIf="categoryForm.controls.GenderStatus.errors.required">Gender status is required</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group centerAlign" >
+                            <div class="col-md-11 control-label">
+                                Add Category Photo
+                            </div>
+                            <br />
+                            <div class="col-md-11">
+                                <input type="file" (change)="categoryImageChangeEvent($event)" #categoryImageInput accept=".png, .jpg, .jpeg, .gif" />
+                            </div>
+                            <div *ngIf="errorCategoryImage" class="error" style="color:#ff0000;">
+                                Category image is required
+                            </div>
+                        </div> 
+                </form>
+            
+
+                <div class="product-panel-win-block">
+                    <div class="col-md-11 control-label examp-size-quantity" style="display: none;">Size Quantity</div>
+                    <label>Quantity - example 45-5, 46-10</label>
+                    <div>
+                        <input type="text" class="form-control" formControlName="ProductSize" />
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.ProductSize.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.ProductSize.errors.required">Product size is required</div>
+                    </div>
+                </div>
+            
+                <div class="product-panel-win-block">
+                    <label>Description</label>
+                    <div>
+                        <textarea class="form-control textareaDescription" rows="1" formControlName="Description"></textarea>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.Description.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.Description.errors.required">Description is required</div>
+                    </div>
+                </div>
+    
+                <div class="product-panel-win-block">
+                    <label>Bg Description</label>
+                    <div>
+                        <textarea class="form-control textareaDescription" rows="1" formControlName="BgDescription"></textarea>
+                    </div>
+                    <div *ngIf="submitted && productForm.controls.BgDescription.errors" class="error" style="color:#ff0000;">
+                        <div *ngIf="productForm.controls.BgDescription.errors.required">Bg description is required</div>
+                    </div>
+                </div>
+        
+                <div>
+                    <div class="text-center body-btns-block">
+                        <input type="submit" class="btn btn-lg btnWindowProductSave" value="Save" />
+                        <input type="button" (click)="closeWindowProduct()" class="btn btn-lg btnWindowProductCancel" value="Cancel" />
+                    </div>
+                </div> 
+            </form>
+        </kendo-window>
+
+        <kendo-window *ngIf="product" title="Edit Product" class="product-panel-win" (close)="closeWindowProduct()" >
+                <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+                    <div class="product-panel-win-block">
+                        <label>Product name</label>
+                        <div>
+                            <input type="text" class="form-control" formControlName="ProductName" value="{{product.Name}}" />
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.ProductName.errors" class="error">
+                            <div *ngIf="productForm.controls.ProductName.errors.required" style="color:#ff0000;">Product name is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>Bg product name</label>
+                        <div>
+                            <input type="text" name="name" class="form-control" formControlName="BgProductName" value="{{product.BgName}}"/>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.BgProductName.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.BgProductName.errors.required">Bg product name is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>
+                            Add Main Photo
+                        </label>
+                        <div>
+                            <input type="file" (change)="mainImageChangeEvent($event)" #mainImageInput accept=".png, .jpg, .jpeg, .gif" formControlName="MainImage" />
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.MainImage.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.MainImage.errors.required">Main photo is required</div>
+                        </div>
+                        <div *ngIf="errorMainImage" class="error" style="color:#ff0000;">
+                            Main photo is required
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>
+                            Add Slide Photos 
+                        </label>
+                        <div>
+                            <input type="file" multiple (change)="slideImagesChangeEvent($event)" #slideImagesInput accept=".png, .jpg, .jpeg, .gif" formControlName="SlideImages" />
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.SlideImages.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.SlideImages.errors.required">Slide photos are required</div>
+                        </div>
+                        <div *ngIf="errorSlideImages" class="error" style="color:#ff0000;">
+                            Slide photos are required
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>Price</label>
+                        <div>
+                            <input type="number" class="form-control" formControlName="Price" value="{{product.Price}}"/>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.Price.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.Price.errors.required">Price is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>Discounts</label>
+                        <div>
+                            <select (change)="onChangeProductSpecials($event.target.value)" formControlName="ProductSpecials" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.ProductSpecials.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.ProductSpecials.errors.required">Discounts are required</div>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedProductSpecials" class="product-panel-win-block" >
+                        <label>Promotion %</label>
+                        <div>
+                            <input type="text" class="form-control" formControlName="PromotionPercent" value="{{product.PromotionPercent}}"/>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.PromotionPercent.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.PromotionPercent.errors.required">Promotion percent is required</div>
+                        </div>
+                    </div>
+                
+                
+                    <div class="product-panel-win-block">
+                        <label>Status</label>
+                        <div>
+                            <select class="form-control" formControlName="ProductStatus">
+                                <option value="1">In stock</option>
+                                <option value="0">Not In Stock</option>
+                            </select>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.ProductStatus.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.ProductStatus.errors.required">Status is required</div>
+                        </div>
+                    </div>
+    
+                    <div class="product-panel-win-block">
+                        <label>Choose a category</label>
+                        <div>
+                            <select (change)="onChangeCategories($event.target.value)" formControlName="categoryDropdown" class="form-control">
+                                <option value="-1">---</option>
+                                <option value="0">Add new category</option>
+                                <option *ngFor="let category of categories" value="{{category.CategoryId}}" >{{category.Name}}</option>
+    
+                                <!-- @foreach (var category in Model)
+                                {
+                                <option value="@category.CategoryId">@category.Name</option>
+                                } -->
+                            </select>
+                        </div>
+                        <div *ngIf="noneSelectedCategoryDropDown" class="error" style="color:#ff0000;">
+                            Make а choice
+                        </div>
+                    </div>
+                  
+                    <form [formGroup]="categoryForm" *ngIf="selectedCategoryDropDown == '0'">
+                        <div class="product-panel-win-block">
+                                <div class="control-label margin-top-minus-5">New Category</div>
+                                <div>
+                                    <input type="text" class="form-control" formControlName="ProductCategory" />
+                                </div>
+                                <div *ngIf="submitted && categoryForm.controls.ProductCategory.errors" class="error" style="color:#ff0000;">
+                                    <div *ngIf="categoryForm.controls.ProductCategory.errors.required">Category name is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="product-panel-win-block">
+                                <label>Bg category name</label>
+                                <div>
+                                    <input type="text" class="form-control" formControlName="BgProductCategory" />
+                                </div>
+                                <div *ngIf="submitted && categoryForm.controls.BgProductCategory.errors" class="error" style="color:#ff0000;">
+                                    <div *ngIf="categoryForm.controls.BgProductCategory.errors.required">Bg category name is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="product-panel-win-block" >
+                                <label>Category Status</label>
+                                <div>
+                                    <select class="form-control" formControlName="CategoryStatus">
+                                        <option value="1">In stock</option>
+                                        <option value="0">Not In Stock</option>
+                                    </select>
+                                </div>
+                                <br />
+                                <div *ngIf="submitted && categoryForm.controls.CategoryStatus.errors" class="error" style="color:#ff0000;">
+                                    <div *ngIf="categoryForm.controls.CategoryStatus.errors.required">Status is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="product-panel-win-block">
+                                <label>Status</label>
+                                <div>
+                                    <select class="form-control" formControlName="GenderStatus">
+                                        <option value="1">Men</option>
+                                        <option value="0">Women</option>
+                                    </select>
+                                </div>
+                                <div *ngIf="submitted && categoryForm.controls.GenderStatus.errors" class="error" style="color:#ff0000;">
+                                    <div *ngIf="categoryForm.controls.GenderStatus.errors.required">Gender status is required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group centerAlign" >
+                                <div class="col-md-11 control-label">
+                                    Add Category Photo
+                                </div>
+                                <br />
+                                <div class="col-md-11">
+                                    <input type="file" (change)="categoryImageChangeEvent($event)" #categoryImageInput accept=".png, .jpg, .jpeg, .gif" />
+                                </div>
+                                <div *ngIf="errorCategoryImage" class="error" style="color:#ff0000;">
+                                    Category image is required
+                                </div>
+                            </div> 
+                    </form>
+                
+    
+                    <div class="product-panel-win-block">
+                        <div class="col-md-11 control-label examp-size-quantity" style="display: none;">Size Quantity</div>
+                        <label>Quantity - example 45-5, 46-10</label>
+                        <div>
+                            <input type="text" class="form-control" formControlName="ProductSize" value="{{product.SizesOfProductText}}" />
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.ProductSize.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.ProductSize.errors.required">Product size is required</div>
+                        </div>
+                    </div>
+                
+                    <div class="product-panel-win-block">
+                        <label>Description</label>
+                        <div>
+                            <textarea class="form-control textareaDescription" rows="1" formControlName="Description" value="{{product.Description}}"></textarea>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.Description.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.Description.errors.required">Description is required</div>
+                        </div>
+                    </div>
+        
+                    <div class="product-panel-win-block">
+                        <label>Bg Description</label>
+                        <div>
+                            <textarea class="form-control textareaDescription" rows="1" formControlName="BgDescription" value="{{product.BgDescription}}"></textarea>
+                        </div>
+                        <div *ngIf="submitted && productForm.controls.BgDescription.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="productForm.controls.BgDescription.errors.required">Bg description is required</div>
+                        </div>
+                    </div>
+            
+                    <div>
+                        <div class="text-center body-btns-block">
+                            <input type="submit" class="btn btn-lg btnWindowProductSave" value="Save" />
+                            <input type="button" (click)="closeWindowProduct()" class="btn btn-lg btnWindowProductCancel" value="Cancel" />
+                        </div>
+                    </div> 
+                </form>
+            </kendo-window>
+
+<app-category></app-category>

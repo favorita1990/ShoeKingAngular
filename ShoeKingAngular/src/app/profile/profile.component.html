@@ -1,0 +1,92 @@
+
+
+    <div class="pag-nav">
+        <ul class="p-list">
+            <li class="act">Controller Name</li>
+        </ul>
+    </div>
+
+    <!---start-product-details--->
+    <div class="profile-panel">
+        <div class="profile-header">
+                <div>
+                    <img align="left" class="image-lg image-cover" src="../../../assets/banner.jpg" alt="Cover Image" title="CoverImage" />
+                </div>
+<!-- 
+                <div class="removeProfileCover">
+                    <img align="left" class="image-lg image-cover" src="../../../assets/banner.jpg" alt="Cover Image" title="Cover Image"/>
+
+                    <button type="submit" name="removeProfile" class="btn btn-warning btn-sm buttonRemoveCover">Remove Title</button>
+                </div>
+
+            <input id="cover-image-upload" name="file" class="hidden" type="file" accept="image/x-png, image/gif, image/jpg image/jpeg"> -->
+
+              <div>
+                  <img align="left" class="image-profile thumbnail" src="../../../assets/banner.jpg" alt="Profile Image" title="ProfileImage" />
+              </div>
+
+              <!-- <div class="removeProfilePicture">
+                  <img align="left" class="image-profile thumbnail" src="../../../assets/banner.jpg" alt="Profile Image" title="ProfileImage" />
+
+                  <button type="submit" name="removeProfile" class="btn btn-warning btn-xs buttonRemoveProfile">Remove Title</button>
+              </div>
+
+              <input id="profile-image-upload" name="file" class="hidden" type="file" accept="image/x-png, image/gif, image/jpg image/jpeg"> -->
+
+              <div class="profile-text">
+                  <h1>
+                    <span>...</span>
+                  </h1>
+                </div>
+        </div>
+        
+
+        <div>
+            <div class="text-center">
+                <div class="inline-radio-buttons" >
+                    <input type="radio" name="profile-radio" id="public-profile" class="profile-radio" value="1" checked />
+                    <!-- <input type="radio" name="profile-radio" id="public-profile" class="profile-radio" value="1" /> -->
+                    <label for="public-profile" class="profile-label" >Public</label>
+                </div>
+
+                <div class="inline-radio-buttons" >
+                    <input type="radio" name="profile-radio" id="private-profile" class="profile-radio" value="0" />
+                    <!-- <input type="radio" name="profile-radio" id="private-profile" class="profile-radio" value="0" checked /> -->
+                    <label for="private-profile" class="profile-label">Private</label>
+                </div>
+            </div>
+
+            <div class="profile-buttons" >
+                <a (click)="clickProfilePhotos(true)" ><input type="submit" class="btn profile-button" value="Overview Title" /></a>
+                <a (click)="clickProfilePhotos(false)" ><input type="submit" class="btn profile-photos" value="Photos Title" /></a>
+            </div>
+            <div class="profileInfo">
+              <div *ngIf="indexOrPhotos;else photos">
+                <app-index></app-index>
+              </div>    
+              <ng-template #photos>
+                <app-photos></app-photos>
+              </ng-template>
+
+                <!--Products-->
+                <div class="products-user-profile">
+                    <h2>Purchased Products</h2>
+                    <br>
+                    <div class="row product-user-row">
+                        <div class="products-user-column">
+                            <div class="product-user-card">
+                                <img src="../../../assets/banner.jpg" alt="@product.Name" title="@product.Name">
+                                <div class="products-user-container">
+                                    <h3 class="centerAlign">Name</h3>
+                                    <div class="centerAlign">QuantityTitle: Count</div>
+                                    <div class="centerAlign">PurchasedAt:</div>
+                                    <div class="centerAlign products-user-added-product">DateAdded</div>
+                                    <p><a id="@product.ProductId" class="product-user-btn" href="/">View</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

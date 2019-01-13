@@ -1,0 +1,6 @@
+
+
+.change-settings-btn:hover, 
+.back-settings-btn:hover {
+    cursor: pointer;
+}

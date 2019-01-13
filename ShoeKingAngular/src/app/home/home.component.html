@@ -1,0 +1,67 @@
+
+  <!-- Banner Starts Here --->
+  <div class="home-img-banner">
+      <div *ngIf="homePage" class="banner" [style.background-image]="'url(' + homePage.ImageUrl + ')'">
+          <h1 #textHeader [attr.contentEditable]="changeTextHeaderBtn ? 'true' : null">{{homePage.TextHeader}}</h1>
+          <div>
+              <span *ngIf="!changeTextHeaderBtn && (userClaims?.Role === 'Admin' || userClaims?.Role === 'Founder')" (click)="changeTextHeader()" class="glyphicon glyphicon-pencil edit-responsible-glyphicon edit-home-text-header"></span>
+              
+              <span *ngIf="changeTextHeaderBtn && (userClaims?.Role === 'Admin' || userClaims?.Role === 'Founder')" (click)="okChangeTextHeader()" class="glyphicon glyphicon-ok ok-edit-text-header"></span>
+              <span *ngIf="changeTextHeaderBtn && (userClaims?.Role === 'Admin' || userClaims?.Role === 'Founder')" (click)="cancelTextHeader()" class="glyphicon glyphicon-remove cancel-edit-text-header"></span>
+          </div>
+          <small #text [attr.contentEditable]="changeTextBtn ? 'true' : null">{{homePage.Text}}</small>
+          <span *ngIf="!changeTextBtn && (userClaims?.Role === 'Admin' || userClaims?.Role === 'Founder')" (click)="changeText()" class="glyphicon glyphicon-pencil edit-responsible-glyphicon edit-home-text" ></span>
+              
+          <span *ngIf="changeTextBtn" (click)="okChangeText()" class="glyphicon glyphicon-ok ok-edit-text-header ok-edit-text"></span>
+          <span *ngIf="changeTextBtn" (click)="cancelText()" class="glyphicon glyphicon-remove cancel-edit-text-header"></span>
+          <div *ngIf="userClaims?.Role === 'Admin' || userClaims?.Role === 'Founder'" class="ban-btn" >
+              <a onclick="document.getElementById('home_change_img').click()" (click)="changeImgBtn($event)" href="#" >Change image</a>
+              <a *ngIf="homePage?.ImageUrl !== ''" (click)="deleteImgBtn($event)" href="/" >Delete image</a>
+              <input (change)="changePictureBanner($event)" id="home_change_img" name="file" class="hidden" type="file" accept="image/x-png, image/gif, image/jpg image/jpeg" >
+          </div>
+      </div>
+  </div>
+  <!-- Banner Ends Here --->
+
+
+  <div *ngIf="newArrivals" class="gallery">
+    <h2 class="gallery-h2">New Arrivals</h2>
+    <div class="gallery-row">
+
+        <div class="gallery-grid" *ngFor="let newArrival of newArrivals;" [routerLink]="['/Product', newArrival.Id]">
+          <div class="grid-top img-pos">
+          <img src="{{newArrival.Photo}}" class="img-responsive" alt="{{newArrival.Name}}" title="{{newArrival.Name}}" >
+          <div class="img-caption"><p>{{newArrival.Name}}</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<!-- 
+  <div *ngIf="discounts" class="d-products f-products">
+    <h2>Most Purchased Products</h2>
+    <div class="sreen-gallery-cursual">
+        <div id="owl1" class="owl-carousel text-center">
+
+          <div class="item" *ngFor="let discount of discounts;" >
+            <div class="product-grid" >
+              <div class="product-pic" >
+                <img src=".{{discount.Photo}}" alt="{{discount.Name}}"  title="{{discount.Name}}" />
+              </div>
+              <div class="product-pic-info" >
+                <h3><a href="/" >{{discount.Name}}</a></h3>
+                <div class="product-pic-info-price-cart" >
+                  <div class="product-pic-info-cart" >
+                    <a class="p-btn" href="/Products/Product/{{discount.Id}}">View</a>
+                  </div>
+                <div class="clearfix"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../scripts/changeSlides.js"></script>
+ -->

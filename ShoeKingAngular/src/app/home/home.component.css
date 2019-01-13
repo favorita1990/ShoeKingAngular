@@ -1,0 +1,42 @@
+.ban-btn{
+	margin:4em 0 0;
+}
+.ban-btn a{
+	font-size:1em;
+	text-transform:uppercase;
+	font-weight:400;
+	border:1px solid rgba(242, 239, 239, 0.78);
+	padding:15px 15px;
+	color:#fff;
+    border: 1px solid #222;
+    text-decoration:none;
+    margin-left: 15px;
+}
+.ban-btn a:hover {
+    color:#f68236;
+	border:1px solid #f68236;
+    -webkit-transition:0.5s all;
+	-o-transition:0.5s all;
+	-moz-transition:0.5s all;
+    transition:0.5s all;
+    cursor: pointer;
+}
+
+
+.edit-home-text-header {
+	color: #fff;
+}
+
+.ok-edit-text-header {
+	margin-right: 10px;
+	background: #000;
+	color: #dddddd;
+}
+
+.ok-edit-text { 
+	margin: 0 10px;
+}
+
+.edit-home-text {
+	color: #dddddd;
+}

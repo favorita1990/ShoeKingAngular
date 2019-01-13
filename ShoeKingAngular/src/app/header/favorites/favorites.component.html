@@ -1,0 +1,30 @@
+<div class="modal" id="window_favorites" *ngIf="favoritesWin" style="display: block;">
+  <div class="modal-dialog modal-sm shopping-cart-modal-dialog animate">
+      <div class="modal-content">
+      <div class="modal-body" (clickOutside)="onClickedOutsideFavoritesWin($event)">
+              <div class="centerAlign">
+                  <h3 class="shopping-cart-header">Your Favorites <span class="close-window" (click)="closeFavoritesWin()">X</span></h3>
+              </div>
+              <div class="shopping-cart-no-products"></div>
+              <div class="shopping-cart-window">
+                      <div class="favorites-user-column" id="removeProductId"><div class="favorites-user-card">
+                      <a class="favorites-user-img" href="/"><img src="../../assets/profilePic.jpg" alt="5" title="4"></a><div class="product-user-container">
+                      <div class="center favorites-product-header">NameTitle</div><div class="centerAlign">
+                      <a class="favorites-product-name" href="/">product name</a></div><div class="center favorites-product-header">ProductNumberTitle</div>
+                      <div class="centerAlign">ProductId</div><div class="center favorites-product-header">PriceTitle</div><div class="centerAlign favorites-product-header-bottom">
+                      <span class="product-price-underline"><span class="product-price-red">Price</span></span><span class="product-price-green">
+                      232Leva</span></div><p class="flex"><a href="#" class="remove-product-cart-btn">RemoveTitle</a></p></div></div></div>
+
+                      <div class="favorites-user-column" id="removeProductId"><div class="favorites-user-card">
+                          <a class="favorites-user-img" href="/"><img src="../../assets/201851421423_slide4.jpg" alt="Name" title="Name"></a><div class="product-user-container">
+                          <div class="center favorites-product-header">ProductNumberTitle</div><div class="centerAlign">
+                          <a class="favorites-product-name" href="/">product.ProductInCart.Name</a></div>
+                          <div class="center favorites-product-header">PriceTitle</div><div class="centerAlign">ProductId</div>
+                          <div class="center favorites-product-header">NameTitle</div><div class="centerAlign favorites-product-header-bottom"><span>Price Leva</span></div>
+                          <p class="flex"><a href="#" class="remove-product-cart-btn">RemoveTitle</a></p></div></div>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>    
+</div>

@@ -1,0 +1,33 @@
+
+<div class="modal" id="login_block" *ngIf="loginWin" style="display: block;">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="modal-content login-modal-form animate" action="/">
+      <div (clickOutside)="onClickedOutsideLoginWin($event)">
+          <div class="imgcontainer">
+            <span (click)="closeLoginWin()" class="close" title="Close Modal">&times;</span>
+          </div>
+        
+            <div class="container">
+                <div *ngIf="loginUserName" class="errors">
+                    <div class="center">Username is not valid</div>
+                </div>
+                <div class="center">
+                    <label for="uname"><b>Username</b></label>
+                </div>
+                <input type="text" placeholder="Enter Username" formControlName="userName" required> 
+                <div *ngIf="loginBtn && loginForm.controls.userName.errors" class="errors">
+                    <div *ngIf="loginForm.controls.userName.errors.required" class="center">Username is required</div>
+                </div>
+                <div class="center">
+                    <label for="psw"><b>Password</b></label>
+                </div>
+                <input type="password" placeholder="Enter Password" formControlName="pass" required>
+                <div *ngIf="loginBtn && loginForm.controls.pass.errors" class="errors">
+                    <div *ngIf="loginForm.controls.pass.errors.required" class="center">Password is required</div>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </div>
+      </div>
+    </form>
+  </div>
+  
+        

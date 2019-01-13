@@ -1,0 +1,97 @@
+
+    <div class="pag-nav"></div>
+
+  <div class="coats">
+      <h3 class="c-head">About Us</h3>
+  </div>
+  <!-- <div class="row about-row">
+      <div class="col-md-6 about-col" >
+          <img src="../../../assets/banner.jpg" class="img-responsive" alt="@OnlineShoeKing.Resources.Language.firstPic" title="@OnlineShoeKing.Resources.Language.firstPic">
+          <div class="who" >
+              <h3>textFirstHeader</h3>
+              <p>textFirst</p>
+          </div>
+      </div>
+      <div class="col-md-6 about-col" >
+          <img src="../../../assets/banner.jpg" class="img-responsive" alt="@OnlineShoeKing.Resources.Language.secondPic" title="@OnlineShoeKing.Resources.Language.secondPic" >
+          <div class="who" >
+              <h3>textSecondHeader</h3>
+              <p>textSecond</p>
+          </div>
+      </div>
+      <div class="clearfix"></div>
+  </div> -->
+
+  <div class="row about-row">
+    <div class="col-md-6 about-col">
+        <div *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="add-delete-about-div">
+            <span onclick="document.getElementById('picture_about_first').click()" class="glyphicon glyphicon-upload add-picture-about-first"></span>
+
+            <span *ngIf="about?.FirstPic != ''" (click)="deletePicturefirst()" class="glyphicon glyphicon-remove delete-picture-about-first"></span>
+            <span *ngIf="about?.FirstPic == ''" class="glyphicon glyphicon-remove hide delete-picture-about-first"></span>
+
+        </div>
+        <input *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" id="picture_about_first" (change)="changePictureAboutFirst($event)" name="file" class="hidden" type="file" accept=".png, .jpg, .jpeg, .gif">
+            
+        <img *ngIf="about?.FirstPic != ''" src="{{about?.FirstPic}}" class="img-responsive picture_about_first" alt="first pic" title="first pic">
+        <img *ngIf="about?.FirstPic == ''" src="" class="img-responsive picture_about_first" alt="" title="">
+
+        <div *ngIf="about?.FirstPicUpdatedAt != '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-first-picture">
+            Edited by <span>{{about?.FirstPicUpdatedby}}</span> on <span>{{about?.FirstPicUpdatedAt}}</span>
+        </div>
+
+        <div *ngIf="about?.FirstPicUpdatedAt == '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-first-picture"></div>
+
+        <div *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'">
+            <span *ngIf="!changeTextBtnFirst" (click)="changeTextFirstPanel()" class="glyphicon glyphicon-pencil edit-responsible-glyphicon edit-responsible-glyphicon-first"></span>
+
+            <span *ngIf="changeTextBtnFirst" (click)="okTextFirstPanel()" class="glyphicon glyphicon-ok ok-edit-responsible-glyphicon"></span>
+            <span *ngIf="changeTextBtnFirst" (click)="cancelTextFirstPanel()" class="glyphicon glyphicon-remove cancel-edit-responsible-glyphicon"></span>
+        </div>
+        <div class="who" [ngClass]="{'who-content-editable' : changeTextBtnFirst}" [attr.contentEditable]="changeTextBtnFirst ? 'true' : null"> 
+            <h3 #textFirstHeader >{{about?.TextFirstHeader}}</h3>
+            <p #textFirst >{{about?.TextFirst}}</p>
+        </div>
+
+        <div *ngIf="about?.UpdatedFirstTextAt != '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-first-text">
+            Edited by <span>{{about?.UpdatedFirstTextBy}}</span> on <span>{{about?.UpdatedFirstTextAt}}</span>
+        </div>
+        <div *ngIf="about?.UpdatedFirstTextAt == '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-first-text"></div>
+    </div>
+    <div class="col-md-6 about-col">
+        <div *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="add-delete-about-div">
+            <span onclick="document.getElementById('picture_about_second').click()" class="glyphicon glyphicon-upload add-picture-about-second"></span>
+                
+            <span *ngIf="about?.SecondPic != ''" (click)="deletePictureSecond()" class="glyphicon glyphicon-remove delete-picture-about-second"></span>
+            <span *ngIf="about?.SecondPic == ''" class="glyphicon glyphicon-remove hide delete-picture-about-second"></span>
+        </div>
+
+        <input *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" id="picture_about_second" (change)="changePictureAboutSecond($event)" name="file" class="hidden" type="file" accept="image/x-png, image/gif, image/jpg image/jpeg">
+
+        <img *ngIf="about?.SecondPic != ''" src="{{about?.SecondPic}}" class="img-responsive picture_about_second" alt="second pic" title="second pic">
+        <img *ngIf="about?.SecondPic == ''" src="" class="img-responsive picture_about_second" alt="" title="">
+
+        <div *ngIf="about?.SecondPicUpdatedAt != '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-second-picture">
+            Edited by <span>{{about?.SecondPicUpdatedby}}</span> on <span>{{about?.SecondPicUpdatedAt}}</span>
+        </div>
+        <div *ngIf="about?.SecondPicUpdatedAt == '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-second-picture"></div>
+
+        <div *ngIf="userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'">
+            <span *ngIf="!changeTextBtnSecond" (click)="changeTextSecondPanel()" class="glyphicon glyphicon-pencil edit-responsible-glyphicon edit-responsible-glyphicon-second"></span>
+        
+            <span *ngIf="changeTextBtnSecond" (click)="okTextSecondPanel()" class="glyphicon glyphicon-ok ok-edit-responsible-glyphicon"></span>
+            <span *ngIf="changeTextBtnSecond" (click)="cancelTextSecondPanel()" class="glyphicon glyphicon-remove cancel-edit-responsible-glyphicon"></span>
+        </div>
+        <div class="who"  [ngClass]="{'who-content-editable' : changeTextBtnSecond}" [attr.contentEditable]="changeTextBtnSecond ? 'true' : null">
+            <h3 #textSecondHeader >{{about?.TextSecondHeader}}</h3>
+            <p #textSecond >{{about?.TextSecond}}</p>
+        </div>
+
+        <div *ngIf="about?.TextSecondUpdatedAt != '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-second-text">
+            Edited by <span>{{about?.TextSecondUpdatedBy}}</span> on <span>{{about?.TextSecondUpdatedAt}}</span>
+        </div>
+        <div *ngIf="about?.TextSecondUpdatedAt == '' && userClaims?.Role === 'Founder' || userClaims?.Role === 'Admin'" class="edited-by-about edited-by-second-text"></div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>

@@ -1,0 +1,67 @@
+
+
+<div class="modal modal-register" *ngIf="registerWin" id="register_block" style="display: block;">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="modal-content register-modal-form animate" action="/">
+        <div (clickOutside)="onClickedOutsideRegisterWin($event)"> 
+            <div class="imgcontainer">
+                <span (click)="closeRegisterWin()" class="close" title="Close Modal">&times;</span>
+            </div>
+        
+            <div class="container" >
+                <div class="center">
+                    <label for="email"><b>Username</b></label>
+                </div>
+
+                <div *ngIf="passConfirmPassCheck" class="center errors">
+                    Passwords are different!
+                </div>
+
+                <input type="text" placeholder="Enter Email" formControlName="Email" 
+                [pattern]="emailPattern" required >
+                <div *ngIf="registerBtn && registerForm.controls.Email.errors" class="errors">
+                    <div *ngIf="registerForm.controls.Email.errors.pattern" class="center">Add valid email</div>
+                    <div *ngIf="registerForm.controls.Email.errors.required" class="center">Email is required</div>
+                </div>
+                <div class="center">
+                    <label for="FirstName"><b>First name</b></label>
+                </div>
+                    <input type="text" placeholder="Enter First Name" formControlName="FirstName" required >
+                <div *ngIf="registerBtn && registerForm.controls.FirstName.errors" class="errors">
+                    <div *ngIf="registerForm.controls.FirstName.errors.required" class="center">First name is required</div>
+                </div>
+                <div class="center">
+                    <label for="LastName"><b>Last name</b></label>
+                </div>
+                    <input type="text" placeholder="Enter Last Name" formControlName="LastName" required >
+                <div *ngIf="registerBtn && registerForm.controls.LastName.errors" class="errors">
+                    <div *ngIf="registerForm.controls.LastName.errors.required" class="center">Last name is required</div>
+                </div>
+
+                <div class="center">
+                    <label for="Gender"><b>Gender</b></label>
+                </div>
+                <select class="form-control gender-register" title="Your gender" formControlName="Gender">
+                    <option value="0">Mr</option>
+                    <option value="1">Mrs</option>
+                </select>
+
+                <div class="center">
+                    <label for="Password"><b>Password</b></label>
+                </div>
+                <input type="password" placeholder="Enter Password" formControlName="Password" required>
+                <div *ngIf="registerBtn && registerForm.controls.Password.errors" class="errors">
+                    <div *ngIf="registerForm.controls.Password.errors.required" class="center">Password is required</div>
+                </div>
+                <div class="center">
+                    <label for="ConfirmPass"><b>Confirm password</b></label>
+                </div>
+                <input type="password" placeholder="Enter Confirm Password" formControlName="ConfirmPass" required>
+                <div *ngIf="registerBtn && registerForm.controls.ConfirmPass.errors" class="errors">
+                    <div *ngIf="registerForm.controls.ConfirmPass.errors.required" class="center">Confirm password is required</div>
+                </div>
+                <button type="submit" class="login-btn">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+      

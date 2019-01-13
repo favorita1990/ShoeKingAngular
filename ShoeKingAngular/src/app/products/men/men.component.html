@@ -1,0 +1,47 @@
+
+  <div class="pag-nav">
+      <ul class="p-list">
+          <li class="act">ControllerName</li>
+      </ul>
+  </div>
+
+  <!-- <div class="no-products">
+      <h2>NoProducts</h2>
+  </div> -->
+
+  <div class="women-category">
+    <div class="sort-body">
+        <select class="selectpicker select-sort-item">
+            <option value="" disabled selected>@OnlineShoeKing.Resources.Language.SortByTitle</option>
+                    <!-- <option value="" disabled selected>AddedTitle</option> -->
+                    <!-- <option value="" disabled selected>@OnlineShoeKing.Resources.Language.Quantity</option> -->
+                    <!-- <option value="" disabled selected>@OnlineShoeKing.Resources.Language.NameTitle</option> -->
+
+            <option value="1">AddedTitle</option>
+
+            <option value="2">Quantity</option>
+
+            <option value="3">NameTitle</option>
+        </select>
+    </div>
+
+    <div class="coats">
+        <h3 class="c-head">@category.Name</h3>
+        <small><a class="men-category-view" id="@category.CategoryId" href="/">ShowAll</a></small>
+        <div class="coat-row">
+            <div class="coat-column">
+                <img src="../../../assets/banner.jpg" class="img-responsive" alt="@product.Name" title="@product.Name">
+                <div class="prod-desc">
+                    <h4>Name</h4>
+                      <span class="product-price-underline"><span class="product-price-red">Price</span></span>
+                      <span class="product-price-green">PromotionPrice .Leva</span>
+                      <!-- <small>@product.PromotionPrice @OnlineShoeKing.Resources.Language.Leva</small> -->
+                </div>
+                <div class="mask">
+                    <div class="info"><a class="men-product-view" id="@product.ProductId" href="/">View</a></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

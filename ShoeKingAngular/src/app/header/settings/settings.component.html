@@ -1,0 +1,84 @@
+
+<div *ngIf="changePasswordPage; else changePassword">
+    <div class="pag-nav">
+        <ul class="p-list">
+          <li class="act">Controller Name</li>
+        </ul>
+    </div>
+
+
+    <div class="manage-setings-body"> 
+        <div class="settings-block">
+            <h2 class="text-center" style="color: #0026ff">Change Account Settings</h2>
+
+            <div class="center">
+                <div class="text-center">
+                    <p class="text-success">Status Message</p>
+                </div>
+
+                <dl class="dl-horizontal">
+                    <dt>Password Title:</dt>
+                    <dd>
+                        <a (click)="changeSettingsPage($event)" class="change-settings-btn">[ Change Password ]</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #changePassword>
+    <div class="pag-nav">
+        <ul class="p-list">
+            <li><a href="/" >Controller Name</a></li>
+            <li>
+                &nbsp;/&nbsp;
+            </li>
+            <li class="act">Action name</li>
+        </ul>
+    </div>
+
+    <h2 class="text-center" style="color:#222222">Change Password</h2>
+
+    <div class="center account-body">
+        <form [formGroup]="settingsForm" (ngSubmit)="changePasswordForm()" action="/">
+            <div class="text-center text-danger">
+                Status
+            </div>
+            <div class="">
+                <div class="control-label">Old Password:</div>
+                <div class="">
+                    <input type="text" class="form-control" formControlName="oldPassword" />
+                </div>
+                <div *ngIf="settingsBtn && settingsForm.controls.oldPassword.errors" class="errors">
+                    <div *ngIf="settingsForm.controls.oldPassword.errors.required" class="center">Old password is required</div>
+                    <div *ngIf="settingsForm.controls.oldPassword.errors.noMatchPassword" class="center">Old password is wrong</div>
+                </div>
+            </div>
+            <div class="">
+                <div class="control-label">New Password:</div>
+                <div class="">
+                    <input type="text" class="form-control" formControlName="newPassword" />
+                </div>
+                <div *ngIf="settingsBtn && settingsForm.controls.newPassword.errors" class="errors">
+                    <div *ngIf="settingsForm.controls.newPassword.errors.required" class="center">New password is required</div>
+                    <div *ngIf="settingsForm.controls.newPassword.errors.nomatch" class="center">New password is not the same like confirm password</div>
+                </div>
+            </div>
+            <div class="">
+                <div class="control-label">Confirm Password:</div>
+                <div class="">
+                    <input type="text" class="form-control" formControlName="confirmPassword" />
+                </div>
+                <div *ngIf="settingsBtn && settingsForm.controls.confirmPassword.errors" class="errors">
+                    <div *ngIf="settingsForm.controls.confirmPassword.errors.required" class="center">Confirm password is required</div>
+                    <div *ngIf="settingsForm.controls.confirmPassword.errors.nomatch" class="center">Confirm password is not the same like new password</div>
+                </div>
+            </div>
+            <div class="">
+                <input type="submit" value="Save" class="btn btn-success btn-lg accept-settings" />
+                <a (click)="backMainPage($event)" class="back-settings-btn">Back</a>
+            </div>
+        </form>
+    </div>
+  </ng-template>

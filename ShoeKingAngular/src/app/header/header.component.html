@@ -1,0 +1,125 @@
+
+
+
+
+<div class="header">
+  <div class="container">
+      <div id="demo_top_wrapper">
+          <div id="sticky_navigation_wrapper">
+              <div id="sticky_navigation">
+                  <div class="first_container navigation-bar">
+                      <div class="navigation">
+                          <div class="logo">
+                              <a [routerLink]="['/Home']">
+                                  SK
+                                  <span class="logo-small-title">Shoe King</span>
+                              </a>
+                          </div>
+                          <span class="menu"></span>
+                          <div class="navig">
+                              <ul>
+                                  <li>
+                                      <a class="language-btn icon-eng" (click)="showLanguage($event)"> 
+                                          <span>UK</span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a [routerLink]="['/Products/Women']" class="women-header">Women</a>
+                                  </li>
+                                  <li>
+                                      <a [routerLink]="['/Products/Men']" class="men-header">Men</a>
+                                  </li>
+                                  <li><a [routerLink]="['/Customers']" class="customers-header">Customers</a></li>
+                                  <li [routerLinkActive]="['active']">
+                                      <a [routerLink]="['/Home/About']" class="about-header about-admin">AboutUs</a>
+                                  </li>
+                                  <li *ngIf="!userClaims">
+                                      <a [routerLink]="['/Home/Contact']" class="contact-header">ContactUs</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="clearfix"></div>
+                      </div>
+                      <div class="navigation-right">
+                          <ul class="login-side">
+
+                            <li *ngIf="userClaims; else loginRegisterPanel" id="loginInfoLiId" class="login-info-li login-info-pic-panel">
+                                <a [routerLink]="['/Profile']">
+                                    <img src="../../assets/profilePic.jpg" alt="name" title="FirstName"/> {{ userClaims.FirstName }}
+                                </a>
+                            </li>
+                            <li *ngIf="userClaims" class="resize-log-out-dropdown settings-arrow-panel" title="Settings">
+                                <div id="logInLogOut" class="wrapper-dropdown" (click)="clickEventLogOut()" [ngClass]="statusLogOut ? 'active' : ''" (clickOutside)="onClickedOutsideLogOut($event)" tabindex="1">
+                                    <ul class="dropdown">
+                                        <li><a href="/"><i class="glyphicon glyphicon-home"></i>Home</a></li>
+                                        <li><a [routerLink]="['/Account/Settings']"><i class="glyphicon glyphicon-cog"></i>Settings</a></li>
+                                        <li>
+                                            <a (click)="Logout()">
+                                                <i class="glyphicon glyphicon-remove"></i>LogOut
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <ng-template #loginRegisterPanel>
+                                <li >
+                                    <span></span><a id="login" (click)="showLogin($event)">Log In</a>
+                                    <a id="register" (click)="showRegister($event)">Register</a>
+                                </li>
+                            </ng-template>
+                            <li>
+                                <button class="search" (click)="showSearch($event)" title="Search Title"></button>
+                            </li> 
+                          </ul>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="container container-bascket-header">
+  <div class="bascket-container">
+      <div class="bascket-container-inside">
+          <div class="shopping-cart-user" (click)="showBascket($event)"><span class="glyphicon glyphicon-shopping-cart"></span><a>Basket (<span class="shopping-cart-count">0</span>)</a></div>
+          <div class="favorites-user" (click)="showFavorites($event)"><span class="glyphicon glyphicon-star"></span><a>Favorites (<span class="favorites-count">0</span>)</a></div>
+          <div class="messages-user" (click)="showMessages($event)" ><span class="glyphicon glyphicon-comment"></span><a>(<span class="messages-user-count">0</span>)</a></div>
+          
+          <div *ngIf="userClaims?.Role === 'Founder'" class="orders-user"><span class="glyphicon glyphicon-list-alt"></span><a>Orders(<span class="orders-user-count">0</span>)</a></div>
+          <div *ngIf="userClaims?.Role === 'Founder'" class="products-user"><span class="glyphicon glyphicon-book"></span><a [routerLink]="['/ProductPanel']" >Products</a></div>
+      </div>
+  </div>
+</div>
+
+<!--Login window-->
+<app-account [loginWin]="loginWin" (sendLoginWin)="loginWinWasClosed($event)"></app-account>
+<!--End login window-->
+
+<!--End login window-->
+<app-register [registerWin]="registerWin" (sendRegisterWin)="registerWinWasClosed($event)"></app-register>
+<!--End login window-->
+
+<!-- Search window -->
+<app-search-header [searchWin]="searchWin" (sendSearchWin)="searchWinWasClosed($event)"></app-search-header>
+<!-- End search window -->
+
+<!-- Language window -->
+<app-language [languageWin]="languageWin" (sendLanguageWin)="languageWinWasClosed($event)"></app-language>
+<!-- End language window -->
+
+<!-- Messages window -->
+<app-messages [messagesWin]="messagesWin" (sendMessagesWin)="messagesWinWasClosed($event)"></app-messages>
+<!-- End messages window -->
+
+<!-- Favorites window -->
+<app-favorites [favoritesWin]="favoritesWin" (sendFavoritesWin)="favoritesWinWasClosed($event)"></app-favorites>
+<!-- End favorites window -->
+
+<!-- Bascket window -->
+<app-bascket [bascketWin]="bascketWin" (sendBascketWin)="bascketWinWasClosed($event)"></app-bascket>
+<!-- End bascket window -->
+

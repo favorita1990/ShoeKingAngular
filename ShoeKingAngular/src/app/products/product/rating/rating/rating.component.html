@@ -1,0 +1,97 @@
+
+
+<!-- rating-->
+<div class="rating-body-product">
+    <div *ngIf="userClaims" class="rating-stars-body">
+        <div class="rating-heading">User Rating</div>
+        <div [ngClass]="{'rate-product-unchecked' : rating?.OwnRating === 0}" class="rate-product">
+                
+          <input *ngIf="rating?.OwnRating === 5" id="rating5" type="radio" value="5" [attr.checked]="true" /><label *ngIf="rating?.OwnRating !== 0" for="rating5" title="5 stars"></label>
+          <input *ngIf="rating?.OwnRating !== 5" id="rating5" type="radio" value="5" [attr.disabled]="rating?.OwnRating !== 0 ? true : false"  />
+          <label *ngIf="rating?.OwnRating === 0" (click)="AddRating('5')" for="rating5" title="5 stars"></label>
+           
+          <input *ngIf="rating?.OwnRating === 4" id="rating4" type="radio" value="4" [attr.checked]="true" /><label *ngIf="rating?.OwnRating !== 0" for="rating4" title="4 stars"></label>
+          <input *ngIf="rating?.OwnRating !== 4" id="rating4" type="radio" value="4" [attr.disabled]="rating?.OwnRating !== 0 ? true : false"  />
+          <label *ngIf="rating?.OwnRating === 0" (click)="AddRating('4')" for="rating4" title="4 stars"></label>
+
+          <input *ngIf="rating?.OwnRating === 3" id="rating3" type="radio" value="3"  [attr.checked]="true" /><label *ngIf="rating?.OwnRating !== 0" for="rating3" title="3 stars"></label>
+          <input *ngIf="rating?.OwnRating !== 3" id="rating3" type="radio" value="3" [attr.disabled]="rating?.OwnRating !== 0 ? true : false"  />
+          <label *ngIf="rating?.OwnRating === 0" (click)="AddRating('3')" for="rating3" title="3 stars"></label>
+
+          <input *ngIf="rating?.OwnRating === 2" id="rating2" type="radio" value="2" [attr.checked]="true" /><label *ngIf="rating?.OwnRating !== 0" for="rating2" title="2 stars"></label>
+          <input *ngIf="rating?.OwnRating !== 2" id="rating2" type="radio" value="2" [attr.disabled]="rating?.OwnRating !== 0 ? true : false"  />
+          <label *ngIf="rating?.OwnRating === 0" (click)="AddRating('2')" for="rating2" title="2 stars"></label>
+
+          <input *ngIf="rating?.OwnRating === 1" id="rating1" type="radio" value="1" [attr.checked]="true" /><label *ngIf="rating?.OwnRating !== 0" for="rating1" title="1 stars"></label>
+          <input *ngIf="rating?.OwnRating !== 1" id="rating1" type="radio" value="1" [attr.disabled]="rating?.OwnRating !== 0 ? true : false"  />
+          <label *ngIf="rating?.OwnRating === 0" (click)="AddRating('1')" for="rating1" title="1 stars"></label>
+
+        </div>
+    </div>
+ 
+  <p>Average based on {{rating?.AllReviews}} reviews.</p>
+  <hr style="border:3px solid #f1f1f1">
+
+  <div class="">
+      <div class="side-rating">
+          <div>5 stars</div>
+      </div>
+      <div class="middle-rating">
+          <div class="bar-container" [attr.title]="rating?.Star5Percent == null ? '0%' : rating?.Star5Percent + '%'">
+              <div class="bar-5" [style.width]="rating?.Star5Percent == null ? '0%' : rating?.Star5Percent + '%'"></div>
+          </div>
+      </div>
+      <div class="side-rating right-side-rating">
+          <div *ngIf="rating?.Star5People == null; else fiveStarsReviews">0</div>
+          <ng-template #fiveStarsReviews>{{rating?.Star5People}}</ng-template>
+      </div>
+      <div class="side-rating">
+          <div>4 stars</div>
+      </div>
+      <div class="middle-rating">
+          <div class="bar-container" [attr.title]="rating?.Star4Percent == null ? '0%' : rating?.Star4Percent + '%'">
+              <div class="bar-4" [style.width]="rating?.Star4Percent == null ? '0%' : rating?.Star4Percent + '%'" ></div>
+          </div>
+      </div>
+      <div class="side-rating right-side-rating">
+          <div *ngIf="rating?.Star4People == null; else fourStarsReviews">0</div>
+          <ng-template #fourStarsReviews>{{rating?.Star4People}}</ng-template>
+      </div>
+      <div class="side-rating">
+          <div>3 stars</div>
+      </div>
+      <div class="middle-rating">
+          <div class="bar-container" [attr.title]="rating?.Star3Percent == null ? '0%' : rating?.Star3Percent + '%'">
+              <div class="bar-3" [style.width]="rating?.Star3Percent == null ? '0%' : rating?.Star3Percent + '%'" ></div>
+          </div>
+      </div>
+      <div class="side-rating right-side-rating">
+          <div *ngIf="rating?.Star3People == null; else threeStarsReviews">0</div>
+          <ng-template #threeStarsReviews>{{rating?.Star3People}}</ng-template>
+      </div>
+      <div class="side-rating">
+          <div>2 stars</div>
+      </div>
+      <div class="middle-rating">
+          <div class="bar-container" [attr.title]="rating?.Star2Percent == null ? '0%' : rating?.Star2Percent + '%'">
+              <div class="bar-2" [style.width]="rating?.Star2Percent == null ? '0%' : rating?.Star2Percent + '%'" ></div>
+          </div>
+      </div>
+      <div class="side-rating right-side-rating">
+          <div *ngIf="rating?.Star2People == null; else twoStarsReviews">0</div>
+          <ng-template #twoStarsReviews>{{rating?.Star2People}}</ng-template>
+      </div>
+      <div class="side-rating">
+          <div>1 star</div>
+      </div>
+      <div class="middle-rating">
+          <div class="bar-container" [attr.title]="rating?.Star1Percent == null ? '0%' : rating?.Star1Percent + '%'">
+              <div class="bar-1" [style.width]="rating?.Star1Percent == null ? '0%' : rating?.Star1Percent + '%'" ></div>
+          </div>
+      </div>
+      <div class="side-rating right-side-rating">
+          <div *ngIf="rating?.Star1People == null; else oneStarsReviews">0</div>
+          <ng-template #oneStarsReviews>{{rating?.Star1People}}</ng-template>
+      </div>
+  </div>
+</div>

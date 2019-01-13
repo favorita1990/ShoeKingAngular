@@ -1,0 +1,23 @@
+
+
+<div class="modal" id="language_block" *ngIf="languageWin" style="display: block;">
+    <div class="modal-dialog modal-sm language-modal-dialog animate">
+      <div class="modal-content">
+        <div class="modal-body" (clickOutside)="onClickedOutsideLanguageWin($event)">
+            <div class="control-group">
+                <div class="controls end">
+                    <span class="glyphicon glyphicon-remove close-language-block" (click)="closeLanguageWin()"></span>
+                </div>
+            </div>
+            <ng-select class="select-language-block"
+                [items]="languages"
+                bindLabel="name"
+                [searchable]="false"
+                (change)="onChange($event)"
+                [(ngModel)]="selectedLanguage"
+                [clearable]="false">
+            </ng-select>
+        </div>
+    </div>
+  </div>    
+</div>

@@ -1,0 +1,38 @@
+
+
+
+
+<!--comments-->
+<div class="product-comment-header">
+    <h3>Comments</h3>
+    <div *ngIf="comments" class="product-comment-body">
+            <div *ngFor="let comment of comments;" class="product-comment-block">
+                <section class="post-heading">
+                    <div class="media">
+                        <div class="media-left">
+                            <a id="{{comment?.Email}}" class="user-product-comment" [routerLink]="['/Customers/Profile', comment?.Email]" >
+                                <img class="media-object photo-product-user-profile" src="{{comment?.Photo}}" width="40" height="40" alt="{{comment?.FullName}}" title="{{comment?.FullName}}">
+                            </a>
+                        </div>
+                        <div class="media-body-product-comment">
+                            <a id="{{comment?.Email}}" [routerLink]="['/Customers/Profile', comment?.Email]" class="product-username-comment user-product-comment"><h4 class="media-heading">{{comment?.FullName}}</h4></a>
+                            <div class="product-time-comment">{{comment?.CreatedAt}}</div>
+                        </div>
+                        <span *ngIf="comment?.OwnComment" (click)="removeComment(comment?.Id)" class="glyphicon glyphicon-remove remove-product-comment"></span>
+                    </div>
+                </section>
+                <section class="post-body">
+                    <p class="post-body-product-comment" >
+                        {{comment.Text}}
+                    </p>
+                </section>
+            </div>
+    </div>
+
+    <div *ngIf="userClaims">
+        <textarea class="form-control text-area-product-comment" [(ngModel)]="text"></textarea>
+        <input (click)="AddRating()" type="submit" class="btn btn-default add-product-comment" value="Add comment" />
+    </div>
+</div>
+
+

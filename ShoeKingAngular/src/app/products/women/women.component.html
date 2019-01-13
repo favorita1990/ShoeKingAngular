@@ -1,0 +1,84 @@
+
+
+<div class="pag-nav">
+    <ul class="p-list">
+        <li class="act">Name</li>
+    </ul>
+</div>
+
+<!-- <div class="no-products">
+    <h2>@OnlineShoeKing.Resources.Language.NoProducts</h2>
+</div> -->
+
+<div class="women-category">
+    <div class="sort-body">
+        <select class="selectpicker select-sort-item">
+            <option value="" disabled selected>SortByTitle</option>
+            <!-- else
+            {
+                if ((string)TempData["sortBy"] == "1")
+                {
+                    <option value="" disabled selected>@OnlineShoeKing.Resources.Language.AddedTitle</option>
+                }
+                else if ((string)TempData["sortBy"] == "2")
+                {
+                    <option value="" disabled selected>@OnlineShoeKing.Resources.Language.Quantity</option>
+                }
+                else if ((string)TempData["sortBy"] == "3")
+                {
+                    <option value="" disabled selected>@OnlineShoeKing.Resources.Language.NameTitle</option>
+                }
+            } -->
+
+            <option value="1">AddedTitle</option>
+
+            <option value="2">Quantity</option>
+
+            <option value="3">NameTitle</option>
+        </select>
+    </div>
+
+    <div class="coats">
+        <h3 class="c-head">Name</h3>
+        <small><a class="women-category-view" id="@category.CategoryId" href="/">ShowAll</a></small>
+        <div class="coat-row">
+            <div class="coat-column">
+                <img src="../../../assets/banner.jpg" class="img-responsive" alt="Name" title="Name">
+                <div class="prod-desc">
+                    <h4>Name</h4>
+                    <span class="product-price-underline"><span class="product-price-red">123</span></span>
+                    <span class="product-price-green">PromotionPrice Leva</span>
+                    <!-- <small>@product.PromotionPrice @OnlineShoeKing.Resources.Language.Leva</small> -->
+                </div>
+                <div class="mask">
+                    <div class="info"><a [routerLink]="['/Products/Product']" class="women-product-view" id="ProductId">View</a></div>
+                </div>
+            </div>
+            <div class="coat-column">
+              <img src="../../../assets/banner.jpg" class="img-responsive" alt="Name" title="Name">
+              <div class="prod-desc">
+                  <h4>Name</h4>
+                  <span class="product-price-underline"><span class="product-price-red">123</span></span>
+                  <span class="product-price-green">PromotionPrice Leva</span>
+                  <!-- <small>@product.PromotionPrice @OnlineShoeKing.Resources.Language.Leva</small> -->
+              </div>
+              <div class="mask">
+                  <div class="info"><a class="women-product-view" id="ProductId1" href="/">View</a></div>
+              </div>
+          </div>
+          <div class="coat-column">
+            <img src="../../../assets/banner.jpg" class="img-responsive" alt="Name" title="Name">
+            <div class="prod-desc">
+                <h4>Name</h4>
+                <span class="product-price-underline"><span class="product-price-red">123</span></span>
+                <span class="product-price-green">PromotionPrice Leva</span>
+                <!-- <small>@product.PromotionPrice @OnlineShoeKing.Resources.Language.Leva</small> -->
+            </div>
+            <div class="mask">
+                <div class="info"><a class="women-product-view" id="ProductId2" href="/">View</a></div>
+            </div>
+        </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

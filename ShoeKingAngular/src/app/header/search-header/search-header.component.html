@@ -1,0 +1,44 @@
+
+<div class="modal" id="search_block" *ngIf="searchWin" style="display: block;">
+    <div class="modal-dialog modal-sm animate">
+      <div class="modal-content">
+  
+        <div class="modal-body" (clickOutside)="onClickedOutsideSearchWin()">
+          <div id="myTabContent" class="tab-content">
+          <div class="tab-pane  active in" id="signin">
+              <form class="">
+              <fieldset>
+              <!-- Sign In Form -->
+              <!-- Text input-->
+              <div class="control-group">
+                  <input required="" id="userid" name="userid" type="text" class="form-control" placeholder="Search for item" class="input-medium" required="">
+              </div>
+
+              <div class="control-group">
+                <div class="flex advanced-search-btns">
+                    <input type="text" class="form-control search-text-from" placeholder="From" /> 
+                    <input type="text" class="form-control search-text-to" placeholder="To" />
+                </div>
+              </div>
+            
+              <!-- Button -->
+              <div class="control-group">
+                <div class="controls">
+                  <button id="search" name="search" class="btn btn-success btn-lg btn-block search-btn">Search</button>
+                </div>
+              </div>
+              
+              <!-- Button -->
+              <div class="control-group">
+                <div class="controls center">
+                  <button type="button" class="btn btn-default search-btn-close" (click)="closeSearchWin()">Close</button>
+                </div>
+              </div>
+              </fieldset>
+              </form>
+          </div>
+        </div>
+    </div>
+  </div>    
+</div>
+</div>

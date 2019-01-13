@@ -1,0 +1,83 @@
+
+  <div class="pag-nav"></div>
+
+  <div class="main-zoom-img-product">
+      <img class="xzoom" src="{{product?.PhotoHeader}}" alt="{{product?.Name}}" title="{{product?.Name}}" />
+  </div>
+  <div class="xzoom-thumbs">
+      <a href="{{product?.PhotoHeader}}">
+          <img class="xzoom-gallery" width="80" src="{{product?.PhotoHeader}}" alt="{{product?.Name}}" title="{{product?.Name}}">
+      </a>
+
+      <a href="{{photo}}" *ngFor="let photo of product?.PhotosOfProduct;">
+          <img class="xzoom-gallery" width="80" src="{{photo}}" alt="Image" title="Image" >
+      </a>
+  </div>
+  <div class="coats sing-c">
+      <h3 class="c-head">{{product?.Name}}</h3>
+      <p class="article">Product Number: {{product?.ProductId}}</p>
+      <p class="article">Quantity Of Purchased: {{product?.PurchasedProductsCount}}</p>
+      <p *ngIf="product?.Specials; else productSpecials">
+        <span class="product-price-underline"><span class="product-price-red">{{product?.Price}}</span></span> <span class="product-price-green">Leva</span>
+      </p>
+      <ng-template #productSpecials>
+        <small>{{product?.Price}} Leva</small>
+      </ng-template>
+      <p class="art">Description</p>
+          <div class="size">
+              <small>Size</small>
+              <select class="size-list">
+                    <option *ngFor="let size of product?.SizesOfProduct;" value="{{size?.SizeId}}">{{size?.Size}}</option>
+              </select>
+          </div>
+      <div>
+          <input type="submit" class="btn btn-default add-to-bascket-btn" value="AddToBascket" />
+      </div>
+  </div>
+
+<app-rating></app-rating>
+
+<app-comment></app-comment>
+
+<!--users-->
+<div class="product-user">
+        <h2>Purchased By</h2>
+        <br>
+        <div class="row product-user-row">
+            <div class="product-user-column">
+                <div class="product-user-card">
+                    <img src="../../../assets/banner.jpg" alt="FirstName" title="FirstName">
+                    <div class="product-user-container">
+                        <h3 class="centerAlign">FullName</h3>
+                        <p><a id="@user.Email" class="product-user-btn" href="/">View</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+<!-- <div class="d-products f-products">
+    <h2>YouAlsoMayLike</h2>
+    <div class="sreen-gallery-cursual">
+        <div id="may_like_products" class="owl-carousel text-center">
+            <div class="item" >
+                <div class="product-grid" >
+                    <div class="product-pic" >
+                        <img src="../../../assets/banner.jpg" alt="Name" title="Name" />
+                    </div>
+                    <div class="product-pic-info" >
+                        <h3><a href="/" >product Name</a></h3>
+                        <div class="product-pic-info-price-cart">
+                            <div class="product-pic-info-cart" >
+                                <a class="p-btn" href="/" >View</a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

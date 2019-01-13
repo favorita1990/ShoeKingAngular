@@ -1,0 +1,246 @@
+
+    <div class="product-grid-container">
+      <div class="grid-container-inside-size">
+              <kendo-grid
+              [kendoGridTemplateEditing]="createNewCategory"
+              [kendoGridBinding]="categories"
+              [selectable]="true"
+              [pageSize]="10"
+              [pageable]="true"
+              [sortable]="true"
+              [navigable]="true"
+              >
+              <ng-template kendoGridToolbarTemplate>
+                  <a class='k-button k-button-icontext' (click)="createCategoryWindow()">
+                      <span class='k-icon k-i-plus'></span>Add new
+                  </a>
+              </ng-template>
+              <kendo-grid-column field="CategoryId" width="130" title="Category Id">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.CategoryId" kendoGridFocusable name="CategoryId" class="k-textbox" required/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="Name" width="180" title="Category name">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.Name" kendoGridFocusable name="Name" class="k-textbox" required/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="Created" width="160" editor="numeric" title="Created">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.Created" kendoGridFocusable name="Created" class="k-textbox" type="number"/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="CreatedBy" width="160" title="Created by">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.CreatedBy" kendoGridFocusable name="CreatedBy" class="k-textbox" required/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="Updated" width="160" title="Updated">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.Updated" kendoGridFocusable name="Updated" class="k-textbox" required/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="UpdatedBy" width="160" title="Updated by">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.UpdatedBy" kendoGridFocusable name="UpdatedBy" type="text"/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="Deleted" width="80" title="Deleted">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.Deleted" kendoGridFocusable name="Deleted" type="checkbox"/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="Status" width="80" title="Status">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.Status" kendoGridFocusable name="Status" type="checkbox"/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="GenderName" width="80" title="Gender">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.GenderName" kendoGridFocusable name="GenderName" type="checkbox"/>
+                  </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="QuantityProduct" width="220" title="Quantity deleted products">
+                  <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+                      <input [(ngModel)]="dataItem.QuantityProduct" kendoGridFocusable name="QuantityProduct" type="checkbox"/>
+                  </ng-template>
+              </kendo-grid-column>
+              
+              <kendo-grid-column field="CategoryID" width="200" title="edit">
+                  <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+                      <a class='k-button k-button-icontext' (click)="editCategoryWindow(dataItem)">
+                          <span class='k-icon k-i-edit'></span>Edit
+                      </a>
+                      <a class='k-button k-button-icontext' (click)="deleteCategory(dataItem)">
+                          <span class='k-icon k-i-delete'></span>Delete
+                      </a>
+                  </ng-template>
+              </kendo-grid-column>
+           </kendo-grid>
+      </div>
+  </div>
+
+
+  <kendo-window *ngIf="openCreateCategory" title="Add New Category" class="product-panel-win" (close)="closeWindowCategory()" >
+          <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+            <div class="product-panel-win-block">
+              <div class="control-label">Category name</div>
+              <div>
+                  <input type="text" class="form-control" formControlName="ProductCategory" />
+              </div>
+              <div *ngIf="submitted && categoryForm.controls.ProductCategory.errors" class="error" style="color:#ff0000;">
+                  <div *ngIf="categoryForm.controls.ProductCategory.errors.required">Category name is required</div>
+              </div>
+          </div>
+          
+          <div class="product-panel-win-block">
+              <label>Bg category name</label>
+              <div>
+                  <input type="text" class="form-control" formControlName="BgProductCategory" />
+              </div>
+              <div *ngIf="submitted && categoryForm.controls.BgProductCategory.errors" class="error" style="color:#ff0000;">
+                  <div *ngIf="categoryForm.controls.BgProductCategory.errors.required">Bg category name is required</div>
+              </div>
+          </div>
+          
+          <div class="product-panel-win-block" >
+              <label>Category Status</label>
+              <div>
+                  <select class="form-control" formControlName="CategoryStatus">
+                      <option value="1">In stock</option>
+                      <option value="0">Not In Stock</option>
+                  </select>
+              </div>
+              <br />
+              <div *ngIf="submitted && categoryForm.controls.CategoryStatus.errors" class="error" style="color:#ff0000;">
+                  <div *ngIf="categoryForm.controls.CategoryStatus.errors.required">Status is required</div>
+              </div>
+          </div>
+          
+          <div class="product-panel-win-block">
+              <label>Status</label>
+              <div>
+                  <select class="form-control" formControlName="GenderStatus">
+                      <option value="1">Men</option>
+                      <option value="0">Women</option>
+                  </select>
+              </div>
+              <div *ngIf="submitted && categoryForm.controls.GenderStatus.errors" class="error" style="color:#ff0000;">
+                  <div *ngIf="categoryForm.controls.GenderStatus.errors.required">Gender status is required</div>
+              </div>
+          </div>
+          
+          <div class="form-group centerAlign" >
+              <div class="col-md-11 control-label">
+                  Add Category Photo
+              </div>
+              <br />
+              <div class="col-md-11">
+                  <input type="file" (change)="categoryImageChangeEvent($event)" formControlName="categoryImageInput" accept=".png, .jpg, .jpeg, .gif" />
+              </div>
+              <div *ngIf="submitted && categoryForm.controls.categoryImageInput.errors" class="error" style="color:#ff0000;">
+                <div *ngIf="categoryForm.controls.categoryImageInput.errors.required"> Category image is required</div>
+            </div>
+          </div> 
+            
+            <div>
+                <div class="text-center body-btns-block">
+                    <input type="submit" class="btn btn-lg btnWindowProductSave" value="Save" />
+                    <input type="button" (click)="closeWindowCategory()" class="btn btn-lg btnWindowProductCancel" value="Cancel" />
+                </div>
+            </div> 
+          </form>
+      </kendo-window>
+
+      <kendo-window *ngIf="category" title="Edit Category" class="product-panel-win" (close)="closeWindowCategory()" >
+              <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+                  <div class="product-panel-win-block">
+                          <div class="control-label">Category name</div>
+                          <div>
+                              <input type="text" class="form-control" formControlName="ProductCategory" value="{{category.Name}}" />
+                          </div>
+                          <div *ngIf="submitted && categoryForm.controls.ProductCategory.errors" class="error" style="color:#ff0000;">
+                              <div *ngIf="categoryForm.controls.ProductCategory.errors.required">Category name is required</div>
+                          </div>
+                      </div>
+                      
+                      <div class="product-panel-win-block">
+                          <label>Bg category name</label>
+                          <div>
+                              <input type="text" class="form-control" formControlName="BgProductCategory" value="{{category.BgName}}" />
+                          </div>
+                          <div *ngIf="submitted && categoryForm.controls.BgProductCategory.errors" class="error" style="color:#ff0000;">
+                              <div *ngIf="categoryForm.controls.BgProductCategory.errors.required">Bg category name is required</div>
+                          </div>
+                      </div>
+                      
+                      <div class="product-panel-win-block" >
+                          <label>Category Status</label>
+                          <div>
+                              <select class="form-control" formControlName="CategoryStatus">
+                                  <option value="1">In stock</option>
+                                  <option value="0">Not In Stock</option>
+                              </select>
+                          </div>
+                          <br />
+                          <div *ngIf="submitted && categoryForm.controls.CategoryStatus.errors" class="error" style="color:#ff0000;">
+                              <div *ngIf="categoryForm.controls.CategoryStatus.errors.required">Status is required</div>
+                          </div>
+                      </div>
+                      
+                      <div class="product-panel-win-block">
+                          <label>Status</label>
+                          <div>
+                              <select class="form-control" formControlName="GenderStatus">
+                                  <option value="1">Men</option>
+                                  <option value="0">Women</option>
+                              </select>
+                          </div>
+                          <div *ngIf="submitted && categoryForm.controls.GenderStatus.errors" class="error" style="color:#ff0000;">
+                              <div *ngIf="categoryForm.controls.GenderStatus.errors.required">Gender status is required</div>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group centerAlign" >
+                          <div class="col-md-11 control-label">
+                              Add Category Photo
+                          </div>
+                          <br />
+                          <div class="col-md-11">
+                              <input type="file" (change)="categoryImageChangeEvent($event)" formControlName="categoryImageInput" accept=".png, .jpg, .jpeg, .gif" />
+                          </div>
+                          <div *ngIf="submitted && categoryForm.controls.categoryImageInput.errors" class="error" style="color:#ff0000;">
+                            <div *ngIf="categoryForm.controls.categoryImageInput.errors.required"> Category image is required</div>
+                        </div>
+                      </div> 
+
+                      <div>
+                        <div class="text-center body-btns-block">
+                            <input type="submit" class="btn btn-lg btnWindowProductSave" value="Save" />
+                            <input type="button" (click)="closeWindowCategory()" class="btn btn-lg btnWindowProductCancel" value="Cancel" />
+                        </div>
+                    </div> 
+                  </form>
+          </kendo-window>
+
+
+<!-- 
+      <kendo-grid
+      [data]="gridView"
+      [selectable]="true"
+      style="height:400px"
+      >
+      <kendo-grid-column field="ProductName" title="Product" [width]="300"></kendo-grid-column>
+      <kendo-grid-column field="ProductID" title="ID" [width]="50"></kendo-grid-column>
+      <kendo-grid-column field="UnitPrice" title="Unit Price" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="QuantityPerUnit" title="Qty Per Unit"></kendo-grid-column>
+      <ng-template kendoGridDetailTemplate let-dataItem>
+      <section *ngIf="dataItem.Category">
+        <p><strong>In Stock:</strong> {{dataItem.UnitsInStock}} units</p>
+        <p><strong>On Order:</strong> {{dataItem.UnitsOnOrder}} units</p>
+        <p><strong>Reorder Level:</strong> {{dataItem.ReorderLevel}} units</p>
+        <p><strong>Discontinued:</strong> {{dataItem.Discontinued}}</p>
+        <p><strong>Category:</strong> {{dataItem.Category?.CategoryName}} - {{dataItem.Category?.Description}}</p>
+      </section>
+      </ng-template>
+      </kendo-grid> -->
